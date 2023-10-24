@@ -40,7 +40,8 @@ INSTALLED_APPS = [
 
 
     # installed apps
-    'CompanyAPP',
+    'CompanyApp',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
