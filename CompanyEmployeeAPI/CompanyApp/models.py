@@ -29,3 +29,7 @@ class Employee(models.Model):
                     ('Developer', 'Developer'),
                     ('HR Manager', 'HR Manager'),
                 ))
+
+
+    def __str__(self):
+        return self.name

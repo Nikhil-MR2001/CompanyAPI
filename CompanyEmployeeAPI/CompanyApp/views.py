@@ -14,15 +14,21 @@ class CompanyViewSet(viewsets.ModelViewSet):
     queryset = Company.objects.all()
     serializer_class = CompanySerializer
 
-
 # companies/{{company_id}}/employees
     @action(detail=True, methods=['GET'])
     def employees(self, request, pk=None):
-        comp = Company.objects.get(pk=pk)
-        emp = Employee.objects.filter(company=comp)
+        try:
+            comp = Company.objects.get(pk=pk)
+            emp = Employee.objects.filter(company=comp)
 
-        emp_serializer = EmployeeSerializer(emp, many=True, context={'request': request})
-        return Response(emp_serializer.data)
+            emp_serializer = EmployeeSerializer(emp, many=True, context={'request': request})
+            return Response(emp_serializer.data)
+        except Exception as e:
+            print(e)
+            return Response({
+                'message' : 'Company does not exist' 
+            })
+
 
 
 
